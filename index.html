@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Simulador de Máquina de Turing</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Simulador de Máquina de Turing</h1>
+        
+        <section>
+            <h2>Definir Máquina</h2>
+            <div>
+                <label for="states">Estados (ej: q0, q1, qf):</label>
+                <input type="text" id="states" placeholder="Ej: q0, q1, qf">
+            </div>
+            <div>
+                <label for="initialState">Estado Inicial:</label>
+                <input type="text" id="initialState" placeholder="Ej: q0">
+            </div>
+            <div>
+                <label for="acceptingStates">Estados de Aceptación (ej: qf):</label>
+                <input type="text" id="acceptingStates" placeholder="Ej: qf">
+            </div>
+            <div>
+                <label for="alphabetInput">Alfabeto de Entrada (ej: 0, 1):</label>
+                <input type="text" id="alphabetInput" placeholder="Ej: 0, 1">
+            </div>
+            <div>
+                <label for="alphabetTape">Alfabeto de la Cinta (ej: 0, 1, _):</label>
+                <input type="text" id="alphabetTape" placeholder="Ej: 0, 1, _">
+            </div>
+            <div>
+                <label for="transitions">Transiciones (ej: q0,0,q1,1,R):</label>
+                <textarea id="transitions" placeholder="Formato: estado,símbolo,siguiente_estado,símbolo_a_escribir,dirección"></textarea>
+            </div>
+            <div>
+                <label for="inputString">Cadena de Entrada:</label>
+                <input type="text" id="inputString" placeholder="Ej: 0110">
+            </div>
+            <button id="run">Ejecutar</button>
+            <button id="clear">Limpiar</button>
+        </section>
+
+        <section>
+            <h2>Cinta</h2>
+            <div id="tapeArea"></div>
+            <div id="headPosition"></div>
+        </section>
+
+        <section>
+            <h2>Estado Actual</h2>
+            <div id="currentState"></div>
+            <div id="result"></div>
+        </section>
+
+        <button id="save">Guardar Configuración</button>
+        <button id="load">Cargar Configuración</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
