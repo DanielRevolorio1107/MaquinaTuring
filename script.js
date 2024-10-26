@@ -13,30 +13,27 @@ let currentState = '';
 let acceptingStates = [];
 
 function runSimulation() {
-    // Validación de entradas
-    if (!document.getElementById('states').value || !document.getElementById('initialState').value ||
-        !document.getElementById('acceptingStates').value || !document.getElementById('alphabetInput').value ||
-        !document.getElementById('alphabetTape').value || !document.getElementById('transitions').value ||
-        !document.getElementById('inputString').value) {
-        alert('Por favor, completa todos los campos.');
-        return;
-    }
-
     // Leer definiciones
     states = document.getElementById('states').value.split(',').map(s => s.trim());
     acceptingStates = document.getElementById('acceptingStates').value.split(',').map(s => s.trim());
     alphabetInput = document.getElementById('alphabetInput').value.split(',').map(a => a.trim());
     alphabetTape = document.getElementById('alphabetTape').value.split(',').map(a => a.trim());
-    parseTransitions(document.getElementById('transitions').value);
     const inputString = document.getElementById('inputString').value.split('');
     
+    // Verificar campos vacíos
+    if (!document.getElementById('initialState').value || !document.getElementById('transitions').value) {
+        alert("Por favor, completa todos los campos requeridos.");
+        return;
+    }
+
     // Inicializar la cinta y el estado actual
     tape = inputString.concat(Array(50).fill(' ')); // Cinta con espacio adicional
     headPosition = 0;
     currentState = document.getElementById('initialState').value; // Estado inicial
+    parseTransitions(document.getElementById('transitions').value);
     updateTapeDisplay();
-
-    // Simulación paso a paso
+    
+    // Comenzar la simulación
     setTimeout(simulateStep, 1000);
 }
 
@@ -78,8 +75,10 @@ function parseTransitions(transitionsInput) {
     const lines = transitionsInput.split('\n');
     lines.forEach(line => {
         const [state, symbol, nextState, writeSymbol, direction] = line.split(',');
-        const key = `${state.trim()},${symbol.trim()}`;
-        transitions[key] = [nextState.trim(), writeSymbol.trim(), direction.trim()];
+        if (state && symbol && nextState && writeSymbol && direction) {
+            const key = `${state.trim()},${symbol.trim()}`;
+            transitions[key] = [nextState.trim(), writeSymbol.trim(), direction.trim()];
+        }
     });
 }
 
